@@ -1,0 +1,43 @@
+﻿@page "/userposts"
+@using Auth0_Blazor.Models
+@using Auth0_Blazor.Services
+@inject PostService PostService
+
+<h3>User Posts</h3>
+
+@if (posts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (posts.Count == 0)
+{
+    <p>No posts found.</p>
+}
+else
+{
+    <div class="post-container">
+        @foreach (var post in posts)
+        {
+            <div class="post-card">
+                <iframe width="100%" height="200" src="@post.VideoLink" frameborder="0" allowfullscreen></iframe>
+                <div class="post-info">
+                    <h4>@post.CraftName</h4>
+                    <p>@post.PostDescription</p>
+                    <p>@post.EventDate</p>
+                    <p>Difficulty: @post.Difficulty</p>
+                    <p>Steps: @post.StepCount</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<UserPost> posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await PostService.GetUserPostsAsync();
+    }
+}
+

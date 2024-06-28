@@ -1,0 +1,63 @@
+﻿<nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">SampleMvcApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="d-block d-lg-flex justify-content-between w-100">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <AuthorizeView>
+                        <Authorized>
+                            <li class="nav-item ">
+                                <a class="nav-link active" aria-current="page" href="/empleados">Empleados</a>
+                            </li>
+                        </Authorized>
+                    </AuthorizeView>
+                </ul>
+
+                <ul class="navbar-nav">
+
+                    <AuthorizeView>
+                        <Authorized>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/profile"> @EmailAddress</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+                            </li>
+                        </Authorized>
+                        <NotAuthorized>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/login?redirectUri=/">Login</a>
+                            </li>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private string EmailAddress = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await authenticationState;
+
+        EmailAddress = state.User.Claims
+            .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
+            .Select(c => c.Value)
+            .FirstOrDefault() ?? string.Empty;
+
+        await base.OnInitializedAsync();
+    }
+}
+

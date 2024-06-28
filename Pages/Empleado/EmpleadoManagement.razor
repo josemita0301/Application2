@@ -1,0 +1,61 @@
+﻿@page "/empleados/manage/{id:int?}"
+@inject Services.EmpleadoService EmpleadoService
+@inject NavigationManager NavigationManager
+@using Models
+
+<h3>@Title</h3>
+
+<EditForm Model="empleado" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <InputText id="name" class="form-control" @bind-Value="empleado.name" />
+    </div>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <InputNumber id="age" class="form-control" @bind-Value="empleado.age" />
+    </div>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <InputText id="title" class="form-control" @bind-Value="empleado.title" />
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <InputText id="gender" class="form-control" @bind-Value="empleado.gender" />
+    </div>
+
+    <button type="submit" class="btn btn-success">@ButtonText</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    private Empleado empleado = new Empleado();
+    private string Title => id == null ? "Agregar Empleado" : "Editar Empleado";
+    private string ButtonText => id == null ? "Guardar" : "Actualizar";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id != null)
+        {
+            empleado = await EmpleadoService.GetEmpleadoByIdAsync(id.Value);
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (id == null)
+        {
+            await EmpleadoService.AddEmpleadoAsync(empleado);
+        }
+        else
+        {
+            await EmpleadoService.UpdateEmpleadoAsync(empleado);
+        }
+
+        NavigationManager.NavigateTo("/empleados");
+    }
+}

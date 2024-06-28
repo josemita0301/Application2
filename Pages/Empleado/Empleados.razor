@@ -1,0 +1,70 @@
+﻿@page "/empleados"
+@inject Services.EmpleadoService EmpleadoService
+@using Models
+@inject NavigationManager NavigationManager
+
+<h3>Empleados</h3>
+
+<button class="btn btn-success" @onclick="NavigateToCreate">Agregar Empleado</button>
+
+@if (empleados == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Title</th>
+                <th>Gender</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var empleado in empleados)
+            {
+                <tr>
+                    <td>@empleado.id</td>
+                    <td>@empleado.name</td>
+                    <td>@empleado.age</td>
+                    <td>@empleado.title</td>
+                    <td>@empleado.gender</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => NavigateToEdit(empleado.id)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteEmpleado(empleado.id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Empleado> empleados;
+
+    protected override async Task OnInitializedAsync()
+    {
+        empleados = await EmpleadoService.GetEmpleadosAsync();
+    }
+
+    private void NavigateToCreate()
+    {
+        NavigationManager.NavigateTo("/empleados/manage");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/empleados/manage/{id}");
+    }
+
+    private async Task DeleteEmpleado(int id)
+    {
+        await EmpleadoService.DeleteEmpleadoAsync(id);
+        empleados = await EmpleadoService.GetEmpleadosAsync();
+    }
+}
+

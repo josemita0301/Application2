@@ -1,0 +1,46 @@
+﻿@page "/"
+@using Auth0_Blazor.Utils
+
+<PageTitle>Index</PageTitle>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mt-4">Welcome to the Auth0 ASP.NET Core Blazor Starter Project</h2>
+        <p>To follow along in building this sample please <a href="https://auth0.com/docs/quickstart/webapp/aspnet-core-blazor">refer to the Quickstart</a>.</p>
+
+        <button class="btn btn-primary" @onclick="EncryptMessage">Encrypt</button>
+        <button class="btn btn-secondary" @onclick="DecryptMessage">Decrypt</button>
+
+        <div>
+            <h3>Encrypted Text</h3>
+            <p>@(encryptedText != null ? encryptedText : "Not yet encrypted")</p>
+        </div>
+
+        <div>
+            <h3>Decrypted Text</h3>
+            <p>@(decryptedText ?? "Not yet decrypted")</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string encryptedText;
+    private string decryptedText;
+
+    private EncryptSymmetricService encryptService = new EncryptSymmetricService();
+    private DecryptSymmetricService decryptService = new DecryptSymmetricService();
+
+    private void EncryptMessage()
+    {
+        encryptedText = encryptService.EncryptSymmetric();
+        decryptedText = null;
+    }
+
+    private void DecryptMessage()
+    {
+        if (encryptedText != null)
+        {
+            decryptedText = decryptService.DecryptSymmetric(encryptedText);
+        }
+    }
+}
