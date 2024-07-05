@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Añadir archivos específicos a ignorar
+quickstart/sample/Config/blazorserverdb-firebase-adminsdk-d6ztc-72ee8cbfb5.json
+quickstart/sample/Utils/model-link-425604-f8-c36bc25d74cd.json

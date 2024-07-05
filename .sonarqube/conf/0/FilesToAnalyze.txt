@@ -1,5 +1,5 @@
 ﻿C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Controllers\ShareController.cs
-C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\InitialApplicationState.cs
+C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\InitialApplicationState\InitialApplicationState.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Migrations\20240611122205_InitialCreate.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Migrations\20240611122205_InitialCreate.Designer.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Migrations\ApplicationDbContextModelSnapshot.cs
@@ -12,7 +12,7 @@ C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Pages\Logout.cshtml
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Program.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Services\EmpleadoService.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Services\PostService.cs
-C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\TokenProvider.cs
+C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\TokenProvider\TokenProvider.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Utils\DecryptSymmetricService.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Utils\EncryptSymmetricService.cs
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\obj\Debug\net6.0\Application2.GlobalUsings.g.cs
@@ -53,5 +53,7 @@ C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\_Imports.razor
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Pages\posts.razor.css
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Shared\MainLayout.razor.css
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Shared\NavMenu.razor.css
+C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\.gitattributes
+C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\.gitignore
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\README.md
 C:\Users\josem\Downloads\quickstart_sample\quickstart\sample\Properties\launchSettings.json

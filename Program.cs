@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Auth0_Blazor.Models;
 using Google.Api;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Auth0_Blazor.Services;
 using Auth0_Blazor.Utils;
+using Auth0_Blazor.TokenProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,5 +111,5 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-app.Run();
+await app.RunAsync();
 
